@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>climaNico</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>climaNico</h1>
+				<nav>
+					<ul class="nav-links">
+						<li><a href="#">Quienes somos</a></li>
+						<li><a href="#">Apoyanos</a></li>
+					</ul>
+				</nav>
+				<!--
+				<button id="nightmode"><span>asd</span></button>-->
+			</header>
+
+			<div class="contenido">
+				<aside>
+					<form action="#">
+						<label for=""
+							>Seleccione la ciudad
+							<input list="ciudades" name="miCiudad" />
+						</label>
+						<datalist id="ciudades"> </datalist>
+
+						<label for="ciudad"> Ciudad: </label>
+						<input type="text" name="ciudad" id="ciudad" value="" /><br />
+						<input type="button" id="btn" value="Buscar!" />
+						<input type="button" id="btn-clear" value="Limpiar" />
+					</form>
+				</aside>
+				<main id="principal"></main>
+			</div>
+		</div>
+		<script src="app.js"></script>
+	</body>
+</html>
