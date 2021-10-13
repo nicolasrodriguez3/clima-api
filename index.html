@@ -10,7 +10,10 @@
 	<body>
 		<div class="container">
 			<header>
-				<h1>climaNico</h1>
+				<div class="logo">
+					<img src="img/menu.png" id="burger" />
+					<h1>climaNico</h1>
+				</div>
 				<nav>
 					<ul class="nav-links">
 						<li><a href="#">Quienes somos</a></li>
@@ -23,22 +26,33 @@
 
 			<div class="contenido">
 				<aside>
-					<form action="#">
-						<label for=""
-							>Seleccione la ciudad
-							<input list="ciudades" name="miCiudad" />
-						</label>
-						<datalist id="ciudades"> </datalist>
+					<label for="miCiudad"
+						>Seleccione la ciudad
+						<input list="lista-ciudades" name="miCiudad" id="miCiudad" />
 
-						<label for="ciudad"> Ciudad: </label>
-						<input type="text" name="ciudad" id="ciudad" value="" /><br />
-						<input type="button" id="btn" value="Buscar!" />
-						<input type="button" id="btn-clear" value="Limpiar" />
-					</form>
+						<datalist id="lista-ciudades"> </datalist
+					></label>
+
+					<input type="button" id="btn" value="Buscar!" />
 				</aside>
-				<main id="principal"></main>
+
+				<main id="principal">
+					<div class="ubicacion">
+						<h3 class="ciudad-nombre">Seleccione una ciudad</h3>
+					</div>
+
+					<div class="temperatura">
+						<div class="texto">
+							<h2 class="temperatura-grados">---</h2>
+							<span>C</span>
+						</div>
+						<canvas id="icon1" width="128" height="128"></canvas>
+					</div>
+					<p class="temperatura-descripcion"></p>
+				</main>
 			</div>
 		</div>
+		<script src="skycons.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>

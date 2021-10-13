@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
+
+:root {
+	--principal: #845ec2;
+	--secundario: #b39cd0;
+	--terciario: #fbeaff;
+	--destacar: #00c9a7;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -6,24 +15,36 @@
 }
 
 body {
-	background: beige;
+	background: var(--principal);
+	background: linear-gradient(
+		to bottom,
+		#2c73d2,
+		#647bd2,
+		#8685d1,
+		#9f90d0,
+		#b39cd0
+	);
+	height: 100vh;
+	width: 100vw;
 }
 
 .container {
 	max-width: 1024px;
 	margin: 0 auto;
-	background: #fff;
 }
 
 header {
+	position: fixed;
+	background: transparent;
+	color: #fff;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem;
-}
-
-header h1 {
-	flex-grow: 2;
+	height: 10vh;
+	width: 100%;
+	max-width: 1024px;
+	z-index: 5;
 }
 
 header nav ul {
@@ -32,14 +53,15 @@ header nav ul {
 
 header nav ul li {
 	list-style: none;
-	margin-right: 2rem;
+	margin-left: 2rem;
 }
 
 .nav-links a {
-	color: black;
+	color: #fff;
 	text-decoration: none;
 }
 
+/*
 #nightmode {
 	background: greenyellow;
 	border: 1px solid black;
@@ -54,27 +76,84 @@ header nav ul li {
 	background: black;
 	border-radius: 50%;
 }
+*/
 
 .contenido {
 	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+#burger {
+	width: 32px;
+	margin-right: 1rem;
 }
 
 .contenido aside {
-	background: lightgoldenrodyellow;
+	background-color: transparent;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+
 	width: 30%;
 	padding: 1rem;
 }
 
+.contenido aside * {
+	margin: 0.1rem 0;
+}
+
 #btn {
 	background: white;
+	border: 1px solid black;
 	padding: 0.5rem 1rem;
-	border-radius: 10px;
-	margin: 1rem auto;
+	border-radius: 5px;
+	margin: 1rem;
 	width: 50%;
 }
 
-.contenido main {
-	background: lightblue;
+#principal {
 	width: 70%;
-	padding: 1rem;
+	height: 40vh;
+	color: #fff;
+	border: 1px solid blue;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.ubicacion h3 {
+	font-family: "Cookie", cursive;
+	font-size: 4.5rem;
+}
+
+.texto {
+	display: flex;
+	align-items: baseline;
+}
+
+.temperatura h2 {
+	font-size: 5rem;
+	font-weight: 500;
+}
+
+.temperatura span {
+	font-size: 3rem;
+}
+
+.temperatura {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	align-items: center;
+}
+
+.temperatura-descripcion {
+	font-size: 1.5rem;
 }
