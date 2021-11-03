@@ -6,12 +6,33 @@ const listaCiudades = document.getElementById("lista-ciudades");
 
 let datos;
 
-boton.addEventListener("click", function () {
+//cargar las opciones en la lista de ciudades
+window.addEventListener("load", function () {
 	fetch("https://ws.smn.gob.ar/map_items/weather")
 		.then((data) => data.json())
 		.then((data) => {
-			mostrarDatos(datos);
+			// guardamos las ciudades en datos
+			datos = data;
+			data.forEach((ciudad) => {
+				//crear opciones
+				let opcion = document.createElement("option");
+				opcion.value = ciudad.name;
+				//insertar la ciudad en la lista
+				listaCiudades.appendChild(opcion);
+			});
+			let ciudadRandom = Math.floor(Math.random() * data.length);
+			ciudadNombre.textContent = data[ciudadRandom].name;
+			temp.textContent = data[ciudadRandom].weather.temp;
+			descripcion.textContent = data[ciudadRandom].weather.description;
+
+			actualizarIcono(data[ciudadRandom]);
+			insertIcon(canva, icono);
 		});
+});
+
+// mostrar la ciudad que selecciono el usuario
+boton.addEventListener("click", function () {
+	mostrarDatos(datos);
 });
 
 // obtener los elementos html
@@ -31,7 +52,7 @@ function mostrarDatos(datos) {
 			descripcion.textContent = datos[iterator].weather.description;
 
 			//cambiamos en icono
-			actualizarIcono(datos[iterator].weather.description);
+			actualizarIcono(datos[iterator]);
 			insertIcon(canva, icono);
 		}
 	}
@@ -43,40 +64,27 @@ function insertIcon(canva, icono = Skycons.PARTLY_CLOUDY_DAY) {
 	skycons.play();
 }
 
-//cargar las opciones en la lista de ciudades
-window.addEventListener("load", function () {
-	fetch("https://ws.smn.gob.ar/map_items/weather")
-		.then((data) => data.json())
-		.then((data) => {
-			datos = data;
-			data.forEach((ciudad) => {
-				//crear opciones
-				let opcion = document.createElement("option");
-				opcion.value = ciudad.name;
-				//insertar la ciudad en la lista
-				listaCiudades.appendChild(opcion);
-			});
-			let ciudadRandom = Math.floor(Math.random() * data.length);
-			ciudadNombre.textContent = data[ciudadRandom].name;
-			temp.textContent = data[ciudadRandom].weather.temp;
-			descripcion.textContent = data[ciudadRandom].weather.description;
-
-			actualizarIcono(data[ciudadRandom].weather.description);
-			insertIcon(canva, icono);
-		});
-});
-
 let icono;
 function actualizarIcono(iconoCiudad) {
-	switch (iconoCiudad) {
+let horaActualizacionClima = new Date(iconoCiudad.updated*1000).getHours();
+	switch (iconoCiudad.weather.description) {
 		case "Despejado":
 			icono = Skycons.CLEAR_DAY;
+			if ( horaActualizacionClima < 7 || horaActualizacionClima > 21) {
+				icono = Skycons.CLEAR_NIGHT;
+			}
 			break;
 		case "Parcialmente nublado":
 			icono = Skycons.PARTLY_CLOUDY_DAY;
+			if ( horaActualizacionClima < 7 || horaActualizacionClima > 21) {
+				icono = Skycons.NIGHT;
+			}
 			break;
 		case "Algo nublado":
 			icono = Skycons.PARTLY_CLOUDY_DAY;
+			if ( horaActualizacionClima < 7 || horaActualizacionClima > 21) {
+				icono = Skycons.NIGHT;
+			}
 			break;
 		case "Nublado":
 			icono = Skycons.CLOUDY;
@@ -109,4 +117,20 @@ function actualizarIcono(iconoCiudad) {
 			console.log(iconoCiudad);
 			break;
 	}
+
 }
+
+// mostrar u ocultar el buscador de ciudades
+let burgerIcon = document.querySelector("#burger");
+burgerIcon.addEventListener("click", () => {
+	let aside = document.querySelector(".buscador");
+	let clases = aside.className;
+	if (clases.indexOf("hidden") == -1){
+		clases += " hidden";
+		aside.className = clases;	
+	}else{
+	clases = clases.replace(" hidden", "");
+	aside.className = clases;
+	}
+})
+
