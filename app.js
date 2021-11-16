@@ -66,23 +66,24 @@ function insertIcon(canva, icono = Skycons.PARTLY_CLOUDY_DAY) {
 
 let icono;
 function actualizarIcono(iconoCiudad) {
-let horaActualizacionClima = new Date(iconoCiudad.updated*1000).getHours();
+	let horaActualizacionClima = new Date(iconoCiudad.updated * 1000).getHours();
+	console.log(iconoCiudad.weather.description);
 	switch (iconoCiudad.weather.description) {
 		case "Despejado":
 			icono = Skycons.CLEAR_DAY;
-			if ( horaActualizacionClima < 7 || horaActualizacionClima > 21) {
+			if (horaActualizacionClima < 7 || horaActualizacionClima > 21) {
 				icono = Skycons.CLEAR_NIGHT;
 			}
 			break;
 		case "Parcialmente nublado":
 			icono = Skycons.PARTLY_CLOUDY_DAY;
-			if ( horaActualizacionClima < 7 || horaActualizacionClima > 21) {
+			if (horaActualizacionClima < 7 || horaActualizacionClima > 21) {
 				icono = Skycons.NIGHT;
 			}
 			break;
 		case "Algo nublado":
 			icono = Skycons.PARTLY_CLOUDY_DAY;
-			if ( horaActualizacionClima < 7 || horaActualizacionClima > 21) {
+			if (horaActualizacionClima < 7 || horaActualizacionClima > 21) {
 				icono = Skycons.NIGHT;
 			}
 			break;
@@ -95,7 +96,22 @@ let horaActualizacionClima = new Date(iconoCiudad.updated*1000).getHours();
 		case "Cubierto con precipitación a la vista":
 			icono = Skycons.CLOUDY;
 			break;
+		case "Algo nublado con relámpagos sin truenos":
+			icono = Skycons.CLOUDY;
+			break;
+		case "Parcialmente nublado con relámpagos sin truenos":
+			icono = Skycons.CLOUDY;
+			break;
+		case "Nublado con relámpagos sin truenos":
+			icono = Skycons.CLOUDY;
+			break;
+		case "Cubierto con relámpagos sin truenos":
+			icono = Skycons.CLOUDY;
+			break;
 		case "Nublado con llovizna":
+			icono = Skycons.RAIN;
+			break;
+		case "Cubierto con llovizna":
 			icono = Skycons.RAIN;
 			break;
 		case "Cubierto con tormenta en la hora anterior":
@@ -117,7 +133,6 @@ let horaActualizacionClima = new Date(iconoCiudad.updated*1000).getHours();
 			console.log(iconoCiudad);
 			break;
 	}
-
 }
 
 // mostrar u ocultar el buscador de ciudades
@@ -125,12 +140,28 @@ let burgerIcon = document.querySelector("#burger");
 burgerIcon.addEventListener("click", () => {
 	let aside = document.querySelector(".buscador");
 	let clases = aside.className;
-	if (clases.indexOf("hidden") == -1){
+	if (clases.indexOf("hidden") == -1) {
 		clases += " hidden";
-		aside.className = clases;	
-	}else{
-	clases = clases.replace(" hidden", "");
-	aside.className = clases;
+		aside.className = clases;
+	} else {
+		clases = clases.replace(" hidden", "");
+		aside.className = clases;
 	}
-})
+});
 
+
+/*
+TODO: no anda
+function cambiarFondos() {
+	const gradientes = [
+		"linear-gradient(to bottom, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);",
+		"linear-gradient(to bottom, rgba(236,136,234,1) 0%, rgba(29,202,231,1) 100%);",
+		"linear-gradient(to bottom, rgba(112,223,143,1) 0%, rgba(231,158,75,1) 100%);",
+		"linear-gradient(to bottom, rgba(194,112,223,1) 0%, rgba(95,244,212,1) 100%);",
+		"linear-gradient(to bottom, rgba(211,102,246,1) 0%, rgba(244,235,95,1) 100%);"
+	];
+	const random = Math.floor(Math.random() * gradientes.length);
+	document.body.style.background = gradientes[random];
+}
+cambiarFondos();
+*/
